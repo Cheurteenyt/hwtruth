@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hwtruth"
+version = "0.1.0"
+description = "The hardware truth CLI: cross-verified GPU/motherboard truth, born from 25 reverse-engineering rings"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Cheurteen" }]
+
+[project.urls]
+Research = "https://github.com/Cheurteenyt/GPU-"
+Motherboard-lab = "https://github.com/Cheurteenyt/BIOS-"
+
+[project.scripts]
+hwtruth = "hwtruth.cli:main"
+
+[tool.setuptools]
+packages = ["hwtruth"]
