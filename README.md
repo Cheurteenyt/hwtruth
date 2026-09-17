@@ -25,6 +25,10 @@ assumptions with cross-verified measurements:
   supplied image.
 - **`hwtruth fan test`** — paired A/B of two fan curves on your own load
   with automatic restore. Decide with data, not vibes.
+- **`hwtruth bios-diff old.CAP new.CAP`** — what does a motherboard BIOS
+  update actually change? Firmware volumes, replaced module blocks,
+  certificate rollovers and AGESA markers, in plain language — before you
+  flash. No public tool does this.
 
 ## Install
 
@@ -70,8 +74,7 @@ The labs produce the truth; hwtruth makes it universal.
 
 ## Roadmap
 
-- [x] `rebar-check`, `rom read`, `tables`, `fan test`
-- [ ] `bios-diff` — CAP-level motherboard BIOS diffing as a command
+- [x] `rebar-check`, `rom read`, `tables`, `bios-diff`, `fan test`
 - [ ] Omarchy plugin packaging
 - [ ] ROM reads beyond the 512 KiB BAR window (SPI paging)
 

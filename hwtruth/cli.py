@@ -4,7 +4,7 @@ import json
 import sys
 from pathlib import Path
 
-from . import bench, rom
+from . import bios, bench, rom
 
 
 def cmd_rebar_check(_args):
@@ -51,6 +51,28 @@ def cmd_tables(args):
     return 0
 
 
+def cmd_bios_diff(args):
+    report = bios.diff(args.old, args.new)
+    if args.json:
+        print(json.dumps(report, indent=1))
+        return 0
+    print(f"old: {report['old']['file']} ({report['old']['bytes']:,} B)")
+    print(f"new: {report['new']['file']} ({report['new']['bytes']:,} B)")
+    if "note" in report:
+        print(f"NOTE: {report['note']}")
+        return 1
+    print(f"changed: {report['changed_regions']} regions, {report['changed_bytes']:,} B")
+    for vol in report.get("volumes_touched", []):
+        print(f"  volume {vol['guid']} @ {vol['offset']} ({vol['length']:,} B): {vol['regions']} region(s)")
+    if "largest_region" in report:
+        print(f"  largest: {report['largest_region']['bytes']:,} B at {report['largest_region']['start']}")
+    if "certificate_rollover" in report:
+        print(f"  certificate rollover: {', '.join(report['certificate_rollover'][:4])}")
+    print(f"VERDICT: {report['verdict']}")
+    print("decide with this in hand; hwtruth never flashes.")
+    return 0
+
+
 def cmd_fan_test(args):
     curve_a = json.loads(Path(args.curve_a).read_text())
     curve_b = json.loads(Path(args.curve_b).read_text())
@@ -82,6 +104,12 @@ def build_parser():
     tables_p = sub.add_parser("tables", help="decode the board's firmware tables, cross-checked with live state")
     tables_p.add_argument("rom", help="path to a ROM image (full dump preferred)")
     tables_p.set_defaults(func=cmd_tables)
+
+    diff_p = sub.add_parser("bios-diff", help="diff two motherboard BIOS CAPs before flashing")
+    diff_p.add_argument("old", help="the currently installed .CAP")
+    diff_p.add_argument("new", help="the update .CAP")
+    diff_p.add_argument("--json", action="store_true", help="machine-readable output")
+    diff_p.set_defaults(func=cmd_bios_diff)
 
     fan_p = sub.add_parser("fan", help="fan-curve experiments")
     fan_sub = fan_p.add_subparsers(dest="fan_command", required=True)
