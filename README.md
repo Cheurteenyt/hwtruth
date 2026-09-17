@@ -84,6 +84,14 @@ The bar widget shows live GPU temperature and power; the panel runs the
 read-only hwtruth checks (ReBAR verification with graceful fallback if the
 CLI is not installed yet).
 
+## Agentic by design
+
+`agents/AGENTS.md` is the contract AI agents work under (evidence over
+assumptions, never flash, noise is noise), and
+`agents/skills/hwtruth/SKILL.md` packages the 25-ring knowledge —
+interpretation tables, failure modes, escalation paths — so any Omarchy
+agent can diagnose hardware with evidence instead of vibes.
+
 ## Roadmap
 
 - [x] `rebar-check`, `rom read`, `tables`, `bios-diff`, `fan test`
