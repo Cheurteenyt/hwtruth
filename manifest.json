@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "cheurteen.hwtruth",
+  "name": "HWTruth",
+  "version": "0.1.0",
+  "author": "Cheurteen",
+  "description": "Hardware truth in your bar: GPU health, ReBAR state, power-budget cross-checks. Read-only, evidence-based.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "plugin/BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "HWTruth",
+    "description": "GPU truth: temperature, power, ReBAR state (hwtruth CLI)",
+    "category": "System",
+    "allowMultiple": false
+  }
+}

@@ -72,6 +72,18 @@ hwtruth is the product of two research repositories:
 
 The labs produce the truth; hwtruth makes it universal.
 
+## Omarchy plugin
+
+The repository is itself an Omarchy shell plugin (bar widget + panel):
+
+```bash
+omarchy plugin add https://github.com/Cheurteenyt/hwtruth --enable
+```
+
+The bar widget shows live GPU temperature and power; the panel runs the
+read-only hwtruth checks (ReBAR verification with graceful fallback if the
+CLI is not installed yet).
+
 ## Roadmap
 
 - [x] `rebar-check`, `rom read`, `tables`, `bios-diff`, `fan test`
